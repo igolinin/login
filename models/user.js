@@ -37,4 +37,4 @@ userSchema.methods.generateWebToken = function() {
 };
 const User = mongoose.model("User", userSchema);
 
-module.exports = { User, validate: validateUser };
+module.exports = User;
