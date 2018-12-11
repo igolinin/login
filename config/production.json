@@ -1,3 +1,3 @@
 {
-    "db": 
+  "db": "mongodb://login-mongodb.default.svc.cluster.local/login"
 }
