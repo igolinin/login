@@ -1,5 +1,5 @@
 {
   "db": {
-    "host": "mongodb://login-mongodb.default.svc.cluster.local/login"
+    "host": "mongodb://login-mongodb.jx-staging.svc.cluster.local/login"
   }
 }
