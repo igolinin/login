@@ -1,27 +1,32 @@
-require('express-async-errors');
-const error = require('./middleware/error')
-const express = require('express');
-const user = require('./routes/user');
-const login = require('./routes/login')
-const bodyParser = require('body-parser');
-const config = require('config');
-const database = config.get('db.host');
-const mongoose = require('mongoose');
+require("express-async-errors");
+require("dotenv").config();
+const error = require("./middleware/error");
+const express = require("express");
+const user = require("./routes/user");
+const login = require("./routes/login");
+const bodyParser = require("body-parser");
+const config = require("config");
+const database = config.get("db.host");
+const mongoose = require("mongoose");
 const app = express();
 
-mongoose.connect(database,{useNewUrlParser: true})
-    .then(() => console.log('connected to mongo db'))
-    .catch(err => console.log('cannot connect to db', err));
+mongoose
+  .connect(
+    database,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("connected to mongo db"))
+  .catch(err => console.log("cannot connect to db", err));
 const db = mongoose.connection;
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/api/v1/user', user);
-app.use('/api/v1/auth', login);
+app.use("/api/v1/user", user);
+app.use("/api/v1/auth", login);
 
-app.use(error)
+app.use(error);
 
-app.listen(3000, () => console.log('server started on port 3000'))
+app.listen(3000, () => console.log("server started on port 3000"));
 
 module.exports = app;

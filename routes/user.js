@@ -27,7 +27,7 @@ router.post("/add", async (req, res) => {
       req.body.email
     }/${key}">confirm</a>`
   };
-  //const mail = await sgMail.send(msg);
+  const mail = await sgMail.send(msg);
 
   res.send(newuser);
 });

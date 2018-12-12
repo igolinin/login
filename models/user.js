@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const Joi = require("joi");
+const secret = process.env.JWT;
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -33,7 +35,7 @@ function validateUser(user) {
 }
 
 userSchema.methods.generateWebToken = function() {
-  return jwt.sign({ email: this.email, role: this.role }, "secret");
+  return jwt.sign({ email: this.email, role: this.role }, secret);
 };
 const User = mongoose.model("User", userSchema);
 
