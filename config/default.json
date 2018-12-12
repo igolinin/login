@@ -1,5 +1,5 @@
 {
-    "db": {
-        "host":"mongodb://localhost/auth"
-    }
+  "db": {
+    "host": "mongodb://login-mongodb.default.svc.cluster.local/login"
+  }
 }
