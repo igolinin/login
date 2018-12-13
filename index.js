@@ -1,5 +1,4 @@
 require("express-async-errors");
-import register from "../../Section 8- Calling Backend Services/start/http-app/src/registerServiceWorker";
 require("dotenv").config();
 const error = require("./middleware/error");
 const express = require("express");
