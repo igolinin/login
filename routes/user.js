@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const sgMail = require("../utils/sendgrid");
 
 router.post("/add", async (req, res) => {
-  let user = await User.findOne({ email: req.body.email });
+  /* let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already exist");
 
   const salt = await bcrypt.genSalt(10);
@@ -29,7 +29,8 @@ router.post("/add", async (req, res) => {
   };
   const mail = await sgMail.send(msg);
 
-  res.send(newuser);
+  res.send(newuser); */
+  res.send("ok post");
 });
 router.get("/confirm/:email/:code", async (req, res) => {
   await User.updateOne(
