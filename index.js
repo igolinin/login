@@ -17,7 +17,7 @@ mongoose
   )
   .then(() => console.log("connected to mongo db at ", database))
   .catch(err => console.log("cannot connect to db", err));
-//const db = mongoose.connection;
+const db = mongoose.connection;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
