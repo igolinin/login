@@ -15,7 +15,7 @@ mongoose
     database,
     { useNewUrlParser: true }
   )
-  .then(() => console.log("connected to mongo db"))
+  .then(() => console.log("connected to mongo db at ", database))
   .catch(err => console.log("cannot connect to db", err));
 const db = mongoose.connection;
 
