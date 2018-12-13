@@ -27,6 +27,6 @@ app.use("/api/v1/auth", login);
 
 app.use(error);
 
-app.listen(3000, () => console.log("server started on port 3000"));
+app.listen(8080, () => console.log("server started on port 8080"));
 
 module.exports = app;
