@@ -1,3 +1,3 @@
 {
-  "db": { "host": "mongodb://login-mongodb.jx-staging.svc.cluster.local/login" }
+  "db": { "host": "mongodb://login-mongodb.jx.svc.cluster.locals/login" }
 }
