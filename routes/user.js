@@ -9,7 +9,7 @@ router.post("/add", async (req, res) => {
   if (user) return res.status(400).send("User already exist");
 
   const salt = await bcrypt.genSalt(10);
-  const key = await bcrypt.genSalt(5);
+  //const key = await bcrypt.genSalt(5);
   const hashed = await bcrypt.hash(req.body.password, salt);
   const newuser = new User({
     email: req.body.email,
@@ -18,7 +18,7 @@ router.post("/add", async (req, res) => {
     mail_conf: key
   });
   const result = await newuser.save();
-  const msg = {
+  /* const msg = {
     to: req.body.email,
     from: "igolinin@gmail.com",
     subject: "Sending with SendGrid is Fun",
@@ -27,7 +27,7 @@ router.post("/add", async (req, res) => {
       req.body.email
     }/${key}">confirm</a>`
   };
-  const mail = await sgMail.send(msg);
+  const mail = await sgMail.send(msg); */
 
   res.send(newuser);
   //res.send("ok post");
