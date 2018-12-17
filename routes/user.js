@@ -8,16 +8,16 @@ router.post("/add", async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already exist");
 
-  const salt = await bcrypt.genSalt(10);
+  //const salt = await bcrypt.genSalt(10);
   //const key = await bcrypt.genSalt(5);
-  const hashed = await bcrypt.hash(req.body.password, salt);
+  //const hashed = await bcrypt.hash(req.body.password, salt);
   const newuser = new User({
     email: req.body.email,
-    password: hashed,
+    password: req.body.password, //hashed,
     status: "not confirmed",
     mail_conf: key
   });
-  const result = await newuser.save();
+  //const result = await newuser.save();
   /* const msg = {
     to: req.body.email,
     from: "igolinin@gmail.com",
