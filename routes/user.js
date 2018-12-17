@@ -17,7 +17,7 @@ router.post("/add", async (req, res) => {
     status: "not confirmed",
     mail_conf: "key"
   });
-  //const result = await newuser.save();
+  const result = await newuser.save();
   /* const msg = {
     to: req.body.email,
     from: "igolinin@gmail.com",
