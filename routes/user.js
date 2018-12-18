@@ -13,7 +13,7 @@ router.post("/add", async (req, res) => {
   const hashed = await bcrypt.hash(req.body.password, salt);
   const newuser = new User({
     email: req.body.email,
-    password: req.body.password, //hashed,
+    password: hashed,
     status: "not confirmed",
     mail_conf: "key"
   });
@@ -29,7 +29,7 @@ router.post("/add", async (req, res) => {
   };
   const mail = await sgMail.send(msg);
 
-  res.send(newuser);
+  res.send(newuser, mail);
   //res.send("ok post");
 });
 router.get("/confirm/:email/:code", async (req, res) => {
