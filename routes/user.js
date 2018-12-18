@@ -28,8 +28,8 @@ router.post("/add", async (req, res) => {
     }/${key}">confirm</a>`
   };
   const mail = await sgMail.send(msg); */
-
-  res.send(newuser, mail);
+  console.log(process.env.SENFGRID);
+  res.send(newuser);
   //res.send("ok post");
 });
 router.get("/confirm/:email/:code", async (req, res) => {
