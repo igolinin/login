@@ -10,7 +10,7 @@ router.post("/add", async (req, res) => {
 
   const salt = await bcrypt.genSalt(10);
   //const key = await bcrypt.genSalt(5);
-  const hashed = await bcrypt.hash(req.body.password, salt);
+  //const hashed = await bcrypt.hash(req.body.password, salt);
   const newuser = new User({
     email: req.body.email,
     password: req.body.password, //hashed,
