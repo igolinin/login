@@ -28,7 +28,7 @@ router.post("/add", async (req, res) => {
     }/${key}">confirm</a>`
   };
   const mail = await sgMail.send(msg); */
-  console.log(process.env.SENFGRID);
+  console.log(process.env.SENDGRID);
   res.send(newuser);
   //res.send("ok post");
 });
