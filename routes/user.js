@@ -18,7 +18,7 @@ router.post("/add", async (req, res) => {
     mail_conf: "key"
   });
   const result = await newuser.save();
-  /* const msg = {
+  const msg = {
     to: req.body.email,
     from: "igolinin@gmail.com",
     subject: "Sending with SendGrid is Fun",
@@ -27,7 +27,7 @@ router.post("/add", async (req, res) => {
       req.body.email
     }/${key}">confirm</a>`
   };
-  const mail = await sgMail.send(msg); */
+  const mail = await sgMail.send(msg);
   console.log(process.env.SENDGRID);
   res.send(newuser);
   //res.send("ok post");
