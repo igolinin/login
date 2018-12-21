@@ -16,7 +16,7 @@ router.post("/add", async (req, res) => {
   const newuser = new User({
     email: req.body.email,
     password: hashed,
-    role: "admin",
+    role: "user",
     mail_conf: "key"
   });
   const result = await newuser.save();
