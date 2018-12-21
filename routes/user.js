@@ -3,6 +3,8 @@ const User = require("../models/user");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const sgMail = require("../utils/sendgrid");
+const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
 router.post("/add", async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
@@ -18,7 +20,7 @@ router.post("/add", async (req, res) => {
     mail_conf: "key"
   });
   const result = await newuser.save();
-  const msg = {
+  /* const msg = {
     to: req.body.email,
     from: "igolinin@gmail.com",
     subject: "Sending with SendGrid is Fun",
@@ -27,8 +29,7 @@ router.post("/add", async (req, res) => {
       req.body.email
     }/${key}">confirm</a>`
   };
-  const mail = await sgMail.send(msg);
-  console.log(process.env.SENDGRID);
+  const mail = await sgMail.send(msg); */
   res.send(newuser);
   //res.send("ok post");
 });
@@ -41,8 +42,28 @@ router.get("/confirm/:email/:code", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {});
-router.put("/", (req, res) => {});
-router.delete("/", async (req, res) => {
+router.put("/password", auth, async (req, res) => {
+  let user = await User.findOne({ email: req.body.email });
+  if (!user) return res.status(400).send("Invalid username or password");
+
+  const validPassword = await bcrypt.compare(req.body.password, user.password);
+  if (!validPassword)
+    return res.status(400).send("Invalid username or password");
+  else {
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(req.body.newPassword, salt);
+    await User.findOneAndUpdate(
+      { email: req.body.email },
+      { $set: { password: hashed } }
+    );
+  }
+
+  res.send("updated");
+});
+router.put("/role", [auth, admin], async (req, res) => {
+  res.send("ok here");
+});
+router.delete("/", auth, async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(400).send("User does not exist");
   await User.deleteOne({ email: req.body.email });
