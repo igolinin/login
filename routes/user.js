@@ -21,7 +21,7 @@ router.post("/add", async (req, res) => {
     role: "user",
     mail_conf: "key"
   });
-  await axios.post(`http://${profileUrl}/api/v1/service/newuser`, {
+  await axios.post(`http://${profileUrl}:9090/api/v1/service/newuser`, {
     email: newuser.email
   });
   const result = await newuser.save();
