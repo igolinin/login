@@ -5,6 +5,8 @@ const bcrypt = require("bcrypt");
 const sgMail = require("../utils/sendgrid");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
+const profileUrl = process.env.PROFILE_SERVICE_HOST;
+const axios = require("axios");
 
 router.post("/add", async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
@@ -18,6 +20,9 @@ router.post("/add", async (req, res) => {
     password: hashed,
     role: "user",
     mail_conf: "key"
+  });
+  await axios.post(`http://${profileUrl}/api/v1/service/newuser`, {
+    email: newuser.email
   });
   const result = await newuser.save();
   /* const msg = {
@@ -61,6 +66,12 @@ router.put("/password", auth, async (req, res) => {
   res.send("updated");
 });
 router.put("/role", [auth, admin], async (req, res) => {
+  let user = await User.findOne({ email: req.body.email });
+  if (!user) return res.status(400).send("user not found");
+  await User.findOneAndUpdate(
+    { email: req.body.email },
+    { $set: { role: req.body.newRole } }
+  );
   res.send("ok here");
 });
 router.delete("/", auth, async (req, res) => {
@@ -68,7 +79,7 @@ router.delete("/", auth, async (req, res) => {
   if (!user) return res.status(400).send("User does not exist");
   await User.deleteOne({ email: req.body.email });
 
-  res.send(`User ${req.body.email} succesfully removed`);
+  res.status(204).send(`User ${req.body.email} succesfully removed`);
 });
 
 module.exports = router;

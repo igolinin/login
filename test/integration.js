@@ -10,11 +10,28 @@ describe("POST /api/v1/user", () => {
   it("post /add", done => {
     let newUser = {
       email: "igolinin@mail.ru",
-      password: "1234"
+      password: "12345678"
     };
     chai
       .request(app)
       .post("/api/v1/user/add")
+      .send(newUser)
+      .end((err, res) => {
+        expect(res).have.status(200);
+        done();
+      });
+  });
+});
+describe("PUT /api/v1/user/password", () => {
+  it("post /add", done => {
+    let newUser = {
+      email: "igolinin@mail.ru",
+      password: "12345678",
+      email: "87654321"
+    };
+    chai
+      .request(app)
+      .put("/api/v1/user")
       .send(newUser)
       .end((err, res) => {
         expect(res).have.status(200);
