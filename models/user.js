@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     default: "not confirmed",
-    enum: ["not confirmed", "confirmed", "admin", "super admin"],
+    enum: ["not confirmed", "confirmed", "admin", "super admin", "user"],
     required: true
   },
   mail_conf: {
