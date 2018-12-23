@@ -89,10 +89,12 @@ router.delete("/", auth, async (req, res) => {
   if (!user) return res.status(400).send("User does not exist");
 
   await axios.delete(`http://${profileUrl}:9090/api/v1/service/`, {
-    email: req.body.email
+    data: {
+      email: req.body.email
+    }
   });
 
-  await User.deleteOne({ data: { email: req.body.email } });
+  await User.deleteOne({ email: req.body.email });
 
   res.status(204).send(`User ${req.body.email} succesfully removed`);
 });
