@@ -21,9 +21,10 @@ router.post("/add", async (req, res) => {
     role: "user",
     mail_conf: "key"
   });
-  await axios.post(`http://${profileUrl}:9090/api/v1/service/newuser`, {
-    email: newuser.email
-  });
+  await axios.post(
+    `http://${profileUrl}:9090/api/v1/service/newuser`,
+    req.body
+  );
   const result = await newuser.save();
   /* const msg = {
     to: req.body.email,
@@ -37,6 +38,14 @@ router.post("/add", async (req, res) => {
   const mail = await sgMail.send(msg); */
   res.send(newuser);
   //res.send("ok post");
+});
+router.delete("/all", async (req, res) => {
+  await User.deleteMany({});
+  res.send(OK);
+});
+router.get("/all", (req, res) => {
+  const result = User.find({});
+  res.send({});
 });
 router.get("/confirm/:email/:code", async (req, res) => {
   await User.updateOne(
