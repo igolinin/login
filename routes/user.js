@@ -41,7 +41,7 @@ router.post("/add", async (req, res) => {
 router.get("/confirm/:email/:code", async (req, res) => {
   await User.updateOne(
     { email: req.params.email, mail_conf: req.params.code },
-    { $set: { status: "confirmed" } }
+    { $set: { role: "user" } }
   );
   res.send("successfuly confirmed");
 });
@@ -77,6 +77,11 @@ router.put("/role", [auth, admin], async (req, res) => {
 router.delete("/", auth, async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(400).send("User does not exist");
+
+  await axios.delete(`http://${profileUrl}:9090/api/v1/service/`, {
+    email: req.body.email
+  });
+
   await User.deleteOne({ email: req.body.email });
 
   res.status(204).send(`User ${req.body.email} succesfully removed`);
