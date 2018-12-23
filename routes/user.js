@@ -40,11 +40,12 @@ router.post("/add", async (req, res) => {
   //res.send("ok post");
 });
 router.delete("/all", async (req, res) => {
+  await axios.delete(`http://${profileUrl}:9090/api/v1/service/all`);
   await User.deleteMany({});
   res.send("OK");
 });
-router.get("/all", (req, res) => {
-  const result = User.find({});
+router.get("/all", async (req, res) => {
+  const result = await User.find({});
   res.send({});
 });
 router.get("/confirm/:email/:code", async (req, res) => {
