@@ -92,7 +92,7 @@ router.delete("/", auth, async (req, res) => {
     email: req.body.email
   });
 
-  await User.deleteOne({ email: req.body.email });
+  await User.deleteOne({ data: { email: req.body.email } });
 
   res.status(204).send(`User ${req.body.email} succesfully removed`);
 });
