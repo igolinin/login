@@ -41,7 +41,7 @@ router.post("/add", async (req, res) => {
 });
 router.delete("/all", async (req, res) => {
   await User.deleteMany({});
-  res.send(OK);
+  res.send("OK");
 });
 router.get("/all", (req, res) => {
   const result = User.find({});
