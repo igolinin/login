@@ -46,8 +46,9 @@ userSchema.methods.generateWebToken = async function() {
   const profile = await axios.get(
     `http://${profileUrl}:9090/api/v1/service/user/${this.email}`
   );
+  console.log(profile);
   return jwt.sign(
-    { email: this.email, role: this.role, country: profile.country },
+    { email: this.email, role: this.role, country: profile.data.country },
     secret
   );
 };
