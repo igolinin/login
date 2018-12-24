@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+import { axios } from "axios";
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const Joi = require("joi");
 const secret = process.env.JWT;
 const profileUrl = process.env.PROFILE_SERVICE_HOST;
+const axios = require("axios");
 
 const userSchema = new mongoose.Schema({
   email: {
