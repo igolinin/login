@@ -18,7 +18,7 @@ router.post("/add", async (req, res) => {
   const newuser = new User({
     email: req.body.email,
     password: hashed,
-    role: "user",
+    role: req.body.role,
     mail_conf: "key"
   });
   await axios.post(

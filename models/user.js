@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const Joi = require("joi");
 const secret = process.env.JWT;
+const profileUrl = process.env.PROFILE_SERVICE_HOST;
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -34,8 +35,14 @@ function validateUser(user) {
   return Joi.validate(user, schema);
 }
 
-userSchema.methods.generateWebToken = function() {
-  return jwt.sign({ email: this.email, role: this.role }, secret);
+userSchema.methods.generateWebToken = async function() {
+  const profile = await axios.get(
+    `http://${profileUrl}:9090/api/v1/service/user/${this.email}`
+  );
+  return jwt.sign(
+    { email: this.email, role: this.role, country: profile.country },
+    secret
+  );
 };
 const User = mongoose.model("User", userSchema);
 
