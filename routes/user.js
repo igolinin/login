@@ -13,7 +13,7 @@ router.post("/add", async (req, res) => {
   if (user) return res.status(400).send("User already exist");
 
   const salt = await bcrypt.genSalt(10);
-  const key = await bcrypt.genSalt(5);
+  //const key = await bcrypt.genSalt(5);
   const hashed = await bcrypt.hash(req.body.password, salt);
   const newuser = new User({
     email: req.body.email,
