@@ -12,7 +12,7 @@ router.post("/login", async (req, res) => {
   if (!validPassword)
     return res.status(400).send("Invalid username or password");
 
-  const token = user.generateWebToken();
+  const token = await user.generateWebToken();
   res.send(token);
 });
 
