@@ -56,7 +56,6 @@ router.get("/confirm/:email/:code", async (req, res) => {
   res.send("successfuly confirmed");
 });
 
-router.post("/", async (req, res) => {});
 router.put("/password", auth, async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(400).send("Invalid username or password");

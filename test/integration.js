@@ -18,9 +18,10 @@ describe("POST /api/v1/user", () => {
       .end((err, res) => {
         expect(res).have.status(200);
         done();
-      });
+      })
+      .timeout(5000);
   });
-  /* it("post /add", done => {
+  it("post /add", done => {
     let newUser = {
       email: "igolinin@mail.ru",
       password: "12345678",
@@ -33,7 +34,7 @@ describe("POST /api/v1/user", () => {
         expect(res).have.status(200);
         done();
       });
-  }); */
+  });
   it("delete /", done => {
     request(app)
       .delete("/api/v1/user")
