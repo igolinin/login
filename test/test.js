@@ -7,13 +7,13 @@ const app = require("../index");
 chai.use(chaiHttp);
 
 describe("POST /api/v1/user", () => {
-  it("post /add", done => {
+  it("login", done => {
     let newUser = {
-      email: "igolinin@mail.ru",
-      password: "12345678"
+      email: "gravida.Praesent.eu@duinec.co.uk",
+      password: "JOZ07JPO3ET"
     };
     request(app)
-      .post("/api/v1/user/add")
+      .post("/api/v1/auth/login")
       .send(newUser)
       .end((err, res) => {
         expect(res).have.status(200);
@@ -21,7 +21,7 @@ describe("POST /api/v1/user", () => {
       })
       .timeout(5000);
   });
-  it("post /add", done => {
+  /* it("post /add", done => {
     let newUser = {
       email: "igolinin@mail.ru",
       password: "12345678",
@@ -34,11 +34,11 @@ describe("POST /api/v1/user", () => {
         expect(res).have.status(200);
         done();
       });
-  });
+  }); */
   it("delete /", done => {
     request(app)
       .delete("/api/v1/user")
-      .send({ email: "igolinin@mail.ru" })
+      .send({ email: "gravida.Praesent.eu@duinec.co.uk" })
       .end((err, res) => {
         console.log(res.status);
         expect(res).have.status(204);
