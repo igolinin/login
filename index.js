@@ -22,7 +22,7 @@ const db = mongoose.connection;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-//app.use(morgan("tiny"));
+app.use(morgan("tiny"));
 
 app.get("/", (req, res) => {
   res.send("OK here");
