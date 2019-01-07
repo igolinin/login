@@ -21,14 +21,14 @@ router.post("/add", async (req, res) => {
     role: req.body.role,
     mail_conf: "key"
   });
-  console.log(profileUrl);
+  //console.log(profileUrl);
   await axios.post(
     `http://${profileUrl}:9090/api/v1/service/newuser`,
     req.body
   );
   const result = await newuser.save();
-  console.log(newuser, result);
-  const msg = {
+  //console.log(newuser, result);
+  /* const msg = {
     to: req.body.email,
     from: "igolinin@gmail.com",
     subject: "Sending with SendGrid is Fun",
@@ -37,7 +37,7 @@ router.post("/add", async (req, res) => {
       req.body.email
     }/${key}">confirm</a>`
   };
-  const mail = await sgMail.send(msg);
+  const mail = await sgMail.send(msg); */
   res.send(newuser);
   //res.send("ok post");
 });
