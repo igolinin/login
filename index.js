@@ -3,7 +3,6 @@ require("dotenv").config();
 const error = require("./middleware/error");
 const express = require("express");
 const user = require("./routes/user");
-const login = require("./routes/login");
 const bodyParser = require("body-parser");
 const config = require("config");
 const database = config.get("db.host");
@@ -29,7 +28,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/user", user);
-app.use("/api/v1/auth", login);
 
 app.use(error);
 
