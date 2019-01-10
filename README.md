@@ -1,3 +1,3 @@
 # node 
 
-Login microserice for Kubernetes deployment. Part of Bachelor Thesis
+Login microservice for Kubernetes deployment. Part of Bachelor Thesis
