@@ -79,11 +79,11 @@ router.put("/password", auth, async (req, res) => {
 router.put("/role", [auth, admin], async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(400).send("user not found");
-  await User.findOneAndUpdate(
+  const result = await User.findOneAndUpdate(
     { email: req.body.email },
     { $set: { role: req.body.newRole } }
   );
-  res.send("ok here");
+  res.send(result);
 });
 router.delete("/", auth, async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
